@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Paris Baguette Yonge &amp; Eglinton — Neighbourhood Bakery Café</title>
+<meta name="description" content="Paris Baguette Yonge & Eglinton at 2401 Yonge Street, Toronto — handcrafted cakes, freshly baked pastries and breads, Lavazza coffee, tea, and grab-and-go café items. Open daily 6 AM–10 PM." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Paris Baguette Yonge & Eglinton" />
+<meta property="og:description" content="Neighbourhood bakery café at 2401 Yonge Street, Toronto. Handcrafted cakes, fresh pastries & breads, Lavazza coffee. Open daily 6 AM–10 PM." />
+<meta property="og:type" content="business.business" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============ Design Tokens ============ */
+  :root {
+    --primary: #001E60;     /* navy */
+    --secondary: #0E1144;   /* deep ink */
+    --tertiary: #FFC600;    /* gold */
+    --neutral: #F6EFE3;     /* cream */
+    --surface: #FFFFFF;
+    --pastry: #E8B778;
+    --croissant: #F6DCAE;
+    --text: #0E1144;
+    --text-inverse: #FFFFFF;
+    --muted: #6B7280;
+
+    --r-sm: 6px;
+    --r-md: 12px;
+    --r-lg: 20px;
+    --r-xl: 28px;
+
+    --s-xs: 4px;
+    --s-sm: 8px;
+    --s-md: 16px;
+    --s-lg: 24px;
+    --s-xl: 40px;
+    --s-xxl: 64px;
+
+    --shadow-soft: 0 18px 40px -22px rgba(0, 30, 96, 0.45);
+    --shadow-card: 0 12px 30px -18px rgba(0, 30, 96, 0.35);
+    --transition: 0.25s ease;
+
+    --maxw: 1180px;
+  }
+
+  /* ============ Reset ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--surface);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+
+  h1, h2, h3, .label, .btn { font-family: 'Montserrat', sans-serif; }
+
+  /* ============ Layout helpers ============ */
+  .container { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: 20px; }
+  .section { padding-block: clamp(48px, 8vw, var(--s-xxl)); }
+
+  .label {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .label.on-dark { color: var(--tertiary); }
+
+  .eyebrow-rule {
+    display: inline-flex; align-items: center; gap: var(--s-sm);
+  }
+  .eyebrow-rule::before {
+    content: ""; width: 28px; height: 2px; background: var(--tertiary); border-radius: 2px;
+  }
+
+  h2 {
+    font-size: clamp(1.6rem, 4vw, 2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--secondary);
+  }
+  .lead { color: var(--muted); max-width: 56ch; margin-top: var(--s-md); }
+
+  /* ============ Buttons ============ */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--s-sm);
+    font-size: 0.95rem; font-weight: 700; letter-spacing: 0.01em;
+    padding: 14px 22px; border-radius: var(--r-md); border: 2px solid transparent;
+    cursor: pointer; transition: var(--transition); min-height: 48px;
+    will-change: transform;
+  }
+  .btn:focus-visible { outline: 3px solid var(--tertiary); outline-offset: 3px; }
+
+  .btn-primary { background: var(--primary); color: var(--text-inverse); }
+  .btn-primary:hover { background: var(--secondary); transform: translateY(-2px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-accent { background: var(--tertiary); color: var(--secondary); }
+  .btn-accent:hover { filter: brightness(1.05); transform: translateY(-2px); }
+  .btn-accent:active { transform: translateY(0); }
+
+  .btn-outline { background: transparent; color: var(--primary); border-color: var(--primary); }
+  .btn-outline:hover { background: var(--primary); color: var(--text-inverse); transform: translateY(-2px); }
+
+  .btn-ghost-light { background: rgba(255,255,255,0.08); color: var(--text-inverse); border-color: rgba(255,255,255,0.35); }
+  .btn-ghost-light:hover { background: rgba(255,255,255,0.16); transform: translateY(-2px); }
+
+  /* ============ Header ============ */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid rgba(0,30,96,0.08);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: var(--s-md); min-height: 68px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark {
+    width: 40px; height: 40px; border-radius: 10px; background: var(--primary);
+    display: grid; place-items: center; color: var(--tertiary);
+    font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem;
+    box-shadow: var(--shadow-card);
+  }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+  .brand-text strong { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.98rem; color: var(--secondary); letter-spacing: -0.01em; }
+  .brand-text span { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; }
+
+  .nav-links { display: none; gap: var(--s-lg); align-items: center; }
+  .nav-links a { font-size: 0.92rem; font-weight: 500; color: var(--secondary); transition: color var(--transition); }
+  .nav-links a:hover { color: var(--primary); }
+  .nav-cta { display: none; }
+
+  @media (min-width: 880px) {
+    .nav-links { display: flex; }
+    .nav-cta { display: inline-flex; }
+  }
+
+  /* ============ Hero ============ */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(120% 100% at 100% 0%, rgba(255,198,0,0.12), transparent 55%),
+      linear-gradient(160deg, var(--primary), var(--secondary));
+    color: var(--text-inverse);
+    overflow: hidden;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: auto -10% -40% auto; width: 60%; height: 80%;
+    background: radial-gradient(circle, rgba(232,183,120,0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid; gap: var(--s-xl); align-items: center;
+    padding-block: clamp(48px, 9vw, 92px);
+  }
+  .hero-copy h1 {
+    font-size: clamp(2.3rem, 6.2vw, 3.4rem);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.03em;
+    margin-top: var(--s-md);
+  }
+  .hero-copy h1 .accent { color: var(--tertiary); }
+  .hero-copy p { margin-top: var(--s-lg); font-size: 1.06rem; color: rgba(255,255,255,0.86); max-width: 48ch; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-md); margin-top: var(--s-xl); }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: var(--s-md) var(--s-xl); margin-top: var(--s-xl);
+    padding-top: var(--s-lg); border-top: 1px solid rgba(255,255,255,0.16);
+  }
+  .hero-meta .item { display: flex; align-items: center; gap: 10px; font-size: 0.92rem; color: rgba(255,255,255,0.9); }
+  .hero-meta svg { flex-shrink: 0; color: var(--tertiary); }
+
+  /* Hero illustration card */
+  .hero-art {
+    position: relative; border-radius: var(--r-xl); overflow: hidden;
+    box-shadow: var(--shadow-soft); border: 1px solid rgba(255,255,255,0.14);
+    min-height: 320px;
+  }
+  .hero-art .badge {
+    position: absolute; left: 18px; bottom: 18px; z-index: 2;
+    background: var(--surface); color: var(--secondary);
+    border-radius: var(--r-md); padding: 12px 16px; box-shadow: var(--shadow-card);
+    display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 600;
+  }
+  .hero-art .badge .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--tertiary); box-shadow: 0 0 0 4px rgba(255,198,0,0.25); }
+
+  @media (min-width: 920px) {
+    .hero-grid { grid-template-columns: 1.05fr 0.95fr; }
+    .hero-art { min-height: 440px; }
+  }
+
+  /* ============ Marquee chips ============ */
+  .offer-strip { background: var(--neutral); }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--s-sm) 10px; padding-block: var(--s-lg); }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface); color: var(--secondary);
+    border-radius: var(--r-xl); padding: 10px 16px; font-size: 0.9rem; font-weight: 600;
+    border: 1px solid rgba(0,30,96,0.08);
+  }
+  .chip .tick { color: var(--primary); }
+
+  /* ============ Offerings ============ */
+  .section-head { max-width: 640px; }
+  .cards-grid {
+    display: grid; gap: var(--s-lg); margin-top: var(--s-xl);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .card {
+    background: var(--surface); border-radius: var(--r-lg); padding: var(--s-lg);
+    border: 1px solid rgba(0,30,96,0.08); box-shadow: var(--shadow-card);
+    transition: transform var(--transition), box-shadow var(--transition);
+    display: flex; flex-direction: column;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+  .card-art {
+    border-radius: var(--r-md); aspect-ratio: 16/10; margin-bottom: var(--s-md);
+    overflow: hidden;
+  }
+  .card h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.12rem; color: var(--secondary); letter-spacing: -0.01em; }
+  .card p { color: var(--muted); font-size: 0.92rem; margin-top: 6px; }
+
+  /* ============ Why visit (split) ============ */
+  .why { background: var(--neutral); }
+  .why-grid { display: grid; gap: var(--s-xl); align-items: center; }
+  .why-art { border-radius: var(--r-xl); overflow: hidden; min-height: 300px; box-shadow: var(--shadow-card); }
+  .feature-list { margin-top: var(--s-lg); display: grid; gap: var(--s-md); }
+  .feature {
+    display: flex; gap: var(--s-md); align-items: flex-start;
+    background: var(--surface); border-radius: var(--r-md); padding: 16px 18px;
+    border: 1px solid rgba(0,30,96,0.07);
+  }
+  .feature .ico {
+    flex-shrink: 0; width: 42px; height: 42px; border-radius: 10px;
+    background: var(--croissant); color: var(--secondary); display: grid; place-items: center;
+  }
+  .feature h3 { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; color: var(--secondary); }
+  .feature p { font-size: 0.9rem; color: var(--muted); margin-top: 2px; }
+
+  @media (min-width: 920px) {
+    .why-grid { grid-template-columns: 0.9fr 1.1fr; }
+    .why-art { min-height: 420px; }
+  }
+
+  /* ============ Visit / CTA navy card ============ */
+  .visit { padding-block: clamp(48px, 8vw, var(--s-xxl)); }
+  .visit-card {
+    background:
+      radial-gradient(110% 120% at 0% 0%, rgba(255,198,0,0.14), transparent 50%),
+      linear-gradient(150deg, var(--primary), var(--secondary));
+    color: var(--text-inverse); border-radius: var(--r-xl);
+    padding: clamp(28px, 5vw, 52px);
+    box-shadow: var(--shadow-soft);
+    display: grid; gap: var(--s-xl);
+  }
+  .visit-card h2 { color: var(--text-inverse); }
+  .visit-info { display: grid; gap: var(--s-lg); }
+  .info-row { display: flex; gap: var(--s-md); align-items: flex-start; }
+  .info-row .ico { flex-shrink: 0; color: var(--tertiary); margin-top: 2px; }
+  .info-row .k { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tertiary); }
+  .info-row .v { font-size: 1rem; color: rgba(255,255,255,0.92); }
+  .info-row .v a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,198,0,0.6); }
+  .info-row .v a:hover { text-decoration-color: var(--tertiary); }
+
+  .hours-table { width: 100%; border-collapse: collapse; margin-top: var(--s-sm); }
+  .hours-table td { padding: 6px 0; font-size: 0.95rem; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .hours-table td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .visit-actions { display: flex; flex-wrap: wrap; gap: var(--s-md); }
+
+  @media (min-width: 900px) {
+    .visit-card { grid-template-columns: 1fr 1fr; align-items: start; }
+    .visit-card .visit-lead { grid-column: 1 / -1; }
+  }
+
+  /* ============ Footer ============ */
+  .footer { background: var(--secondary); color: rgba(255,255,255,0.78); padding-block: var(--s-xl); }
+  .footer-grid { display: grid; gap: var(--s-lg); }
+  .footer .brand-text strong { color: #fff; }
+  .footer .brand-text span { color: rgba(255,255,255,0.6); }
+  .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tertiary); margin-bottom: 10px; }
+  .footer-col p, .footer-col a { font-size: 0.9rem; color: rgba(255,255,255,0.78); }
+  .footer-col a:hover { color: #fff; }
+  .footer-col ul { display: grid; gap: 6px; }
+  .footer-bottom {
+    margin-top: var(--s-xl); padding-top: var(--s-md); border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex; flex-wrap: wrap; gap: var(--s-sm); justify-content: space-between; font-size: 0.8rem; color: rgba(255,255,255,0.55);
+  }
+  @media (min-width: 760px) {
+    .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+  }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ Header ============ -->
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="#top" aria-label="Paris Baguette Yonge and Eglinton, home">
+      <span class="brand-mark" aria-hidden="true">PB</span>
+      <span class="brand-text">
+        <strong>Paris Baguette</strong>
+        <span>Yonge &amp; Eglinton</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#offerings">Offerings</a>
+      <a href="#why">Why visit</a>
+      <a href="#visit">Hours &amp; location</a>
+    </nav>
+    <a class="btn btn-primary nav-cta" href="tel:+14163223337">Call the café</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ Hero ============ -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="label on-dark eyebrow-rule">Bakery café · 2401 Yonge Street, Toronto</span>
+        <h1>Freshly baked, <span class="accent">close to home.</span></h1>
+        <p>
+          A neighbourhood bakery café at Yonge &amp; Eglinton serving handcrafted cakes,
+          freshly baked pastries and breads, Lavazza coffee, tea, and grab-and-go favourites —
+          every day from morning to night.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-accent" href="#visit">Visit us today</a>
+          <a class="btn btn-ghost-light" href="https://parisbaguette.ca/locations/on/toronto/2401-yonge-street/" target="_blank" rel="noopener">
+            View menu &amp; order
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span class="item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            Open daily · 6 AM – 10 PM
+          </span>
+          <span class="item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            2401 Yonge Street, Toronto
+          </span>
+        </div>
+      </div>
+
+      <!-- Decorative bakery illustration (CSS/SVG, no photography claims) -->
+      <div class="hero-art" role="img" aria-label="Illustration of bakery pastries and a cup of coffee on a warm cream backdrop.">
+        <svg viewBox="0 0 600 460" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#F6DCAE"/>
+              <stop offset="1" stop-color="#E8B778"/>
+            </linearGradient>
+            <linearGradient id="crust" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#E8B778"/>
+              <stop offset="1" stop-color="#C98A45"/>
+            </linearGradient>
+            <linearGradient id="cake" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FFFFFF"/>
+              <stop offset="1" stop-color="#F6EFE3"/>
+            </linearGradient>
+          </defs>
+          <rect width="600" height="460" fill="url(#bg)"/>
+          <circle cx="470" cy="90" r="120" fill="#FFFFFF" opacity="0.18"/>
+          <circle cx="90" cy="380" r="90" fill="#001E60" opacity="0.06"/>
+
+          <!-- Croissant -->
+          <g transform="translate(70 70) rotate(-8)">
+            <path d="M10 60 C40 10, 150 10, 180 60 C150 95, 40 95, 10 60 Z" fill="url(#crust)" stroke="#A9712F" stroke-width="3"/>
+            <path d="M40 58 q12 -16 26 0 M80 54 q12 -16 26 0 M120 58 q12 -16 26 0" stroke="#A9712F" stroke-width="3" fill="none" opacity="0.6"/>
+          </g>
+
+          <!-- Layer cake -->
+          <g transform="translate(330 220)">
+            <ellipse cx="95" cy="170" rx="120" ry="22" fill="#001E60" opacity="0.10"/>
+            <rect x="20" y="60" width="150" height="110" rx="12" fill="url(#cake)" stroke="#E8B778" stroke-width="3"/>
+            <path d="M20 92 q37 26 75 0 t75 0" stroke="#FFC600" stroke-width="6" fill="none"/>
+            <path d="M20 124 q37 26 75 0 t75 0" stroke="#E8B778" stroke-width="6" fill="none" opacity="0.7"/>
+            <circle cx="60" cy="48" r="9" fill="#FFC600"/>
+            <circle cx="95" cy="42" r="9" fill="#E8B778"/>
+            <circle cx="130" cy="48" r="9" fill="#FFC600"/>
+          </g>
+
+          <!-- Coffee cup -->
+          <g transform="translate(70 250)">
+            <path d="M0 30 h150 v50 a70 70 0 0 1 -150 0 Z" fill="#FFFFFF" stroke="#001E60" stroke-width="4"/>
+            <path d="M150 40 a26 26 0 0 1 0 44" fill="none" stroke="#001E60" stroke-width="4"/>
+            <path d="M40 6 q-8 10 0 20 M75 0 q-8 12 0 24 M110 6 q-8 10 0 20" stroke="#FFFFFF" stroke-width="4" fill="none" opacity="0.8"/>
+            <rect x="0" y="30" width="150" height="14" fill="#001E60" opacity="0.85"/>
+          </g>
+        </svg>
+        <span class="badge"><span class="dot" aria-hidden="true"></span>Baked fresh every morning</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Offer strip ============ -->
+  <section class="offer-strip" aria-label="What we serve">
+    <div class="container">
+      <ul class="chips">
+        <li class="chip"><span class="tick" aria-hidden="true">●</span>Handcrafted cakes</li>
+        <li class="chip"><span class="tick" aria-hidden="true">●</span>Pastries &amp; breads</li>
+        <li class="chip"><span class="tick" aria-hidden="true">●</span>Lavazza coffee</li>
+        <li class="chip"><span class="tick" aria-hidden="true">●</span>Teas</li>
+        <li class="chip"><span class="tick" aria-hidden="true">●</span>Grab-and-go salads &amp; sandwiches</li>
+        <li class="chip"><span class="tick" aria-hidden="true">●</span>Catering</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Offerings ============ -->
+  <section class="section" id="offerings">
+    <div class="container">
+      <div class="section-head">
+        <span class="label eyebrow-rule">On the counter</span>
+        <h2 style="margin-top:var(--s-md)">Made for everyday moments</h2>
+        <p class="lead">From a morning coffee run to a celebration cake, here&rsquo;s what you&rsquo;ll find at our Yonge &amp; Eglinton café.</p>
+      </div>
+
+      <div class="cards-grid">
+        <!-- Cakes -->
+        <article class="card">
+          <div class="card-art" role="img" aria-label="Illustration of a frosted layer cake topped with berries.">
+            <svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="320" height="200" fill="#F6EFE3"/>
+              <ellipse cx="160" cy="172" rx="120" ry="18" fill="#001E60" opacity="0.08"/>
+              <rect x="95" y="70" width="130" height="90" rx="12" fill="#fff" stroke="#E8B778" stroke-width="3"/>
+              <path d="M95 100 q32 22 65 0 t65 0" stroke="#FFC600" stroke-width="6" fill="none"/>
+              <circle cx="130" cy="58" r="9" fill="#C0405B"/>
+              <circle cx="160" cy="52" r="9" fill="#C0405B"/>
+              <circle cx="190" cy="58" r="9" fill="#C0405B"/>
+            </svg>
+          </div>
+          <h3>Handcrafted cakes</h3>
+          <p>Layered, decorated, and made to mark the moments that matter.</p>
+        </article>
+
+        <!-- Pastries -->
+        <article class="card">
+          <div class="card-art" role="img" aria-label="Illustration of golden croissants and pastries.">
+            <svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="320" height="200" fill="#F6DCAE"/>
+              <g transform="translate(60 70)">
+                <path d="M0 40 C25 5, 110 5, 135 40 C110 70, 25 70, 0 40 Z" fill="#E8B778" stroke="#A9712F" stroke-width="3"/>
+                <path d="M28 38 q9 -12 20 0 M58 35 q9 -12 20 0 M88 38 q9 -12 20 0" stroke="#A9712F" stroke-width="3" fill="none" opacity="0.6"/>
+              </g>
+              <g transform="translate(150 105)">
+                <path d="M0 30 C18 5, 80 5, 98 30 C80 52, 18 52, 0 30 Z" fill="#C98A45" stroke="#8a5a26" stroke-width="3"/>
+              </g>
+            </svg>
+          </div>
+          <h3>Freshly baked pastries</h3>
+          <p>Buttery, flaky bakery favourites for a café stop or take-home treat.</p>
+        </article>
+
+        <!-- Breads -->
+        <article class="card">
+          <div class="card-art" role="img" aria-label="Illustration of fresh-baked loaves of bread.">
+            <svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="320" height="200" fill="#F6EFE3"/>
+              <g transform="translate(50 60)">
+                <rect x="0" y="20" width="150" height="80" rx="40" fill="url(#crust2)"/>
+                <defs><linearGradient id="crust2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8B778"/><stop offset="1" stop-color="#C98A45"/></linearGradient></defs>
+                <path d="M30 28 l16 64 M60 24 l16 72 M90 24 l16 72 M120 28 l16 64" stroke="#A9712F" stroke-width="4" opacity="0.55"/>
+              </g>
+              <ellipse cx="225" cy="150" rx="70" ry="30" fill="#C98A45"/>
+            </svg>
+          </div>
+          <h3>Fresh-baked breads</h3>
+          <p>A daily selection of loaves, ready to take home for the table.</p>
+        </article>
+
+        <!-- Coffee & tea -->
+        <article class="card">
+          <div class="card-art" role="img" aria-label="Illustration of a steaming cup of Lavazza coffee.">
+            <svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="320" height="200" fill="#001E60"/>
+              <g transform="translate(95 55)">
+                <path d="M0 30 h120 v40 a60 60 0 0 1 -120 0 Z" fill="#fff"/>
+                <path d="M120 38 a22 22 0 0 1 0 38" fill="none" stroke="#fff" stroke-width="5"/>
+                <rect x="0" y="30" width="120" height="12" fill="#FFC600"/>
+                <path d="M35 4 q-7 9 0 18 M65 0 q-7 11 0 22 M95 4 q-7 9 0 18" stroke="#FFC600" stroke-width="4" fill="none" opacity="0.85"/>
+              </g>
+            </svg>
+          </div>
+          <h3>Lavazza coffee &amp; teas</h3>
+          <p>Espresso, brewed coffee, and a selection of teas to stay or to go.</p>
+        </article>
+
+        <!-- Grab and go -->
+        <article class="card">
+          <div class="card-art" role="img" aria-label="Illustration of a grab-and-go salad and sandwich.">
+            <svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="320" height="200" fill="#F6DCAE"/>
+              <g transform="translate(55 70)">
+                <path d="M0 30 l70 -34 l70 34 l-70 34 Z" fill="#F6EFE3" stroke="#E8B778" stroke-width="3"/>
+                <path d="M14 30 l56 27 l56 -27" fill="none" stroke="#C98A45" stroke-width="4"/>
+                <rect x="40" y="6" width="60" height="16" rx="6" fill="#7Fae5e"/>
+              </g>
+              <circle cx="235" cy="120" r="42" fill="#fff" stroke="#E8B778" stroke-width="3"/>
+              <circle cx="222" cy="112" r="9" fill="#7Fae5e"/>
+              <circle cx="248" cy="118" r="9" fill="#C0405B"/>
+              <circle cx="232" cy="134" r="9" fill="#FFC600"/>
+            </svg>
+          </div>
+          <h3>Grab-and-go café items</h3>
+          <p>Salads and sandwiches made for busy days and quick lunches.</p>
+        </article>
+
+        <!-- Catering -->
+        <article class="card">
+          <div class="card-art" role="img" aria-label="Illustration of a catering platter of baked goods.">
+            <svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="320" height="200" fill="#F6EFE3"/>
+              <ellipse cx="160" cy="120" rx="120" ry="40" fill="#fff" stroke="#E8B778" stroke-width="3"/>
+              <ellipse cx="160" cy="116" rx="120" ry="36" fill="#F6DCAE"/>
+              <circle cx="110" cy="110" r="20" fill="#E8B778"/>
+              <circle cx="160" cy="104" r="22" fill="#C98A45"/>
+              <circle cx="212" cy="110" r="20" fill="#E8B778"/>
+              <circle cx="135" cy="124" r="14" fill="#FFC600"/>
+              <circle cx="188" cy="124" r="14" fill="#FFC600"/>
+            </svg>
+          </div>
+          <h3>Catering</h3>
+          <p>Platters and orders for gatherings, available through official ordering links.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Why visit ============ -->
+  <section class="why section" id="why">
+    <div class="container why-grid">
+      <div class="why-art" role="img" aria-label="Illustration of a warm bakery café storefront at Yonge and Eglinton.">
+        <svg viewBox="0 0 520 460" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#001E60"/><stop offset="1" stop-color="#0E1144"/></linearGradient>
+          </defs>
+          <rect width="520" height="460" fill="url(#sky)"/>
+          <rect x="40" y="120" width="440" height="300" rx="14" fill="#F6EFE3"/>
+          <rect x="40" y="120" width="440" height="58" rx="14" fill="#001E60"/>
+          <text x="260" y="158" text-anchor="middle" fill="#FFC600" font-family="Montserrat, sans-serif" font-weight="800" font-size="26" letter-spacing="2">PARIS BAGUETTE</text>
+          <!-- Awning -->
+          <g>
+            <path d="M40 178 h440 l-20 34 H60 Z" fill="#FFC600"/>
+            <path d="M70 178 v34 M110 178 v34 M150 178 v34 M190 178 v34 M230 178 v34 M270 178 v34 M310 178 v34 M350 178 v34 M390 178 v34 M430 178 v34" stroke="#001E60" stroke-width="3" opacity="0.5"/>
+          </g>
+          <!-- Windows -->
+          <rect x="70" y="240" width="150" height="150" rx="8" fill="#fff" stroke="#E8B778" stroke-width="3"/>
+          <rect x="300" y="240" width="150" height="150" rx="8" fill="#fff" stroke="#E8B778" stroke-width="3"/>
+          <!-- Door -->
+          <rect x="235" y="270" width="50" height="120" rx="6" fill="#001E60"/>
+          <circle cx="248" cy="332" r="3" fill="#FFC600"/>
+          <!-- Pastry hints in window -->
+          <circle cx="110" cy="300" r="14" fill="#E8B778"/><circle cx="150" cy="305" r="14" fill="#C98A45"/><circle cx="190" cy="300" r="14" fill="#FFC600"/>
+          <circle cx="340" cy="300" r="14" fill="#C98A45"/><circle cx="380" cy="305" r="14" fill="#E8B778"/><circle cx="420" cy="300" r="14" fill="#FFC600"/>
+        </svg>
+      </div>
+
+      <div>
+        <span class="label eyebrow-rule">Your local café</span>
+        <h2 style="margin-top:var(--s-md)">A neighbourhood spot at Yonge &amp; Eglinton</h2>
+        <p class="lead">Right on Yonge Street, we&rsquo;re an easy stop whether you&rsquo;re grabbing breakfast, meeting a friend, or picking up a cake on the way home.</p>
+
+        <div class="feature-list">
+          <div class="feature">
+            <span class="ico" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <div>
+              <h3>Open early to late</h3>
+              <p>Every day from 6:00&nbsp;AM to 10:00&nbsp;PM — morning coffee to evening treats.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <span class="ico" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </span>
+            <div>
+              <h3>Easy to find on Yonge</h3>
+              <p>Located at 2401 Yonge Street, in the heart of the Yonge &amp; Eglinton neighbourhood.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <span class="ico" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+            </span>
+            <div>
+              <h3>Stay or take it to go</h3>
+              <p>Sit in with a coffee, or grab pastries, breads, and café items on the run.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Visit / Hours / Contact ============ -->
+  <section class="visit container" id="visit">
+    <div class="visit-card">
+      <div class="visit-lead">
+        <span class="label on-dark eyebrow-rule">Hours &amp; location</span>
+        <h2 style="margin-top:var(--s-md)">Come see us today</h2>
+        <p style="color:rgba(255,255,255,0.86); margin-top:var(--s-md); max-width:52ch;">
+          Drop by Paris Baguette Yonge &amp; Eglinton for something freshly baked — or call ahead and we&rsquo;ll help you plan.
+        </p>
+      </div>
+
+      <div class="visit-info">
+        <div class="info-row">
+          <span class="ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          </span>
+          <div>
+            <div class="k">Address</div>
+            <div class="v">
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Paris+Baguette+2401+Yonge+Street+Toronto+ON+M4P+3H1" target="_blank" rel="noopener">2401 Yonge Street, Toronto, ON M4P 3H1</a>
+            </div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+          </span>
+          <div>
+            <div class="k">Phone</div>
+            <div class="v"><a href="tel:+14163223337">(416) 322-3337</a></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="ico" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </span>
+          <div style="width:100%">
+            <div class="k">Hours</div>
+            <table class="hours-table">
+              <tbody>
+                <tr><td>Monday – Sunday</td><td>6:00 AM – 10:00 PM</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:0.8rem; color:rgba(255,255,255,0.6); margin-top:8px;">Open every day. Hours may vary on holidays — please call to confirm.</p>
+          </div>
+        </div>
+
+        <div class="visit-actions">
+          <a class="btn btn-accent" href="tel:+14163223337">Call the café</a>
+          <a class="btn btn-ghost-light" href="https://www.google.com/maps/search/?api=1&amp;query=Paris+Baguette+2401+Yonge+Street+Toronto+ON+M4P+3H1" target="_blank" rel="noopener">Get directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <a class="brand" href="#top" aria-label="Paris Baguette Yonge and Eglinton, back to top">
+        <span class="brand-mark" aria-hidden="true">PB</span>
+        <span class="brand-text">
+          <strong>Paris Baguette</strong>
+          <span>Yonge &amp; Eglinton</span>
+        </span>
+      </a>
+      <p style="margin-top:var(--s-md); max-width:38ch;">
+        A neighbourhood bakery café at 2401 Yonge Street, serving handcrafted cakes, fresh pastries and breads, coffee, tea, and grab-and-go favourites.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Paris+Baguette+2401+Yonge+Street+Toronto+ON+M4P+3H1" target="_blank" rel="noopener">2401 Yonge Street, Toronto, ON</a></li>
+        <li><a href="tel:+14163223337">(416) 322-3337</a></li>
+        <li>Open daily · 6 AM – 10 PM</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>More</h4>
+      <ul>
+        <li><a href="https://parisbaguette.ca/locations/on/toronto/2401-yonge-street/" target="_blank" rel="noopener">Official location page</a></li>
+        <li><a href="#offerings">Offerings</a></li>
+        <li><a href="#visit">Hours &amp; location</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>&copy; <span id="yr">2026</span> Paris Baguette Yonge &amp; Eglinton.</span>
+    <span>2401 Yonge Street, Toronto, ON M4P 3H1</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
