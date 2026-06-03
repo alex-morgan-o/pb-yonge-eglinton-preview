@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Paris Baguette Yonge &amp; Eglinton - Neighbourhood Bakery Café</title>
-<meta name="description" content="Paris Baguette Yonge & Eglinton at 2401 Yonge Street, Toronto. Handcrafted cakes, freshly baked pastries and breads, Lavazza coffee, tea, and grab-and-go café items. Open daily 6 AM to 10 PM." />
+<meta name="description" content="Paris Baguette Yonge & Eglinton at 2401 Yonge Street, Toronto. Handcrafted cakes, freshly baked pastries and breads, savoury bakes, sandwiches, Lavazza coffee, and grab-and-go items. Open daily 6 AM to 10 PM." />
 
 <!-- Open Graph -->
 <meta property="og:title" content="Paris Baguette Yonge & Eglinton" />
@@ -17,12 +17,14 @@
 
 <style>
   /* ============================================================
-     Paris Baguette Yonge & Eglinton - redesign
+     Paris Baguette Yonge & Eglinton - menu-update redesign
      Tokens: official PB navy / gold + warm bakery neutrals (DESIGN.md)
-     Dials: VARIANCE 7 · MOTION 4 (CSS-only) · DENSITY 3
+     Dials: VARIANCE 7 · MOTION 4 (CSS-only) · DENSITY 4
+     Mode: redesign-preserve. Picsum placeholders replaced with
+           official Paris Baguette menu photography (parisbaguette.ca).
      Theme lock: light page, navy brand blocks. One accent: gold.
-     Radius system: chips = pill, buttons = 12px, tiles/cards = 20px,
-                    large panels/media = 28px. Applied everywhere.
+     Radius system: chips/pills = pill, buttons = 12px, tiles/cards = 20px,
+                    large panels/media = 28px.
      ============================================================ */
 
   :root {
@@ -46,7 +48,6 @@
     --s-xs: 4px;  --s-sm: 8px;  --s-md: 16px;
     --s-lg: 24px; --s-xl: 40px; --s-xxl: 64px;
 
-    /* low-opacity navy shadows, tinted to brand (no pure black) */
     --shadow-soft: 0 24px 60px -32px rgba(0, 30, 96, 0.45);
     --shadow-card: 0 14px 34px -22px rgba(0, 30, 96, 0.35);
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -77,7 +78,6 @@
     font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--primary);
   }
-  .label.on-dark { color: var(--tertiary); }
 
   h2 {
     font-size: clamp(1.9rem, 4.6vw, 2.6rem);
@@ -89,7 +89,7 @@
   /* ---------- buttons ---------- */
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    white-space: nowrap;                 /* CTAs never wrap */
+    white-space: nowrap;
     font-size: 0.95rem; font-weight: 700; letter-spacing: 0.01em;
     padding: 14px 24px; border-radius: var(--r-md);
     border: 2px solid transparent; cursor: pointer;
@@ -107,10 +107,6 @@
 
   .btn-outline { background: transparent; color: var(--primary); border-color: rgba(0,30,96,0.25); }
   .btn-outline:hover { border-color: var(--primary); transform: translateY(-2px); }
-
-  /* ghost over navy/photographic backgrounds: white stroke + scrim-safe */
-  .btn-ghost-light { background: rgba(255,255,255,0.06); color: var(--text-inverse); border-color: rgba(255,255,255,0.45); }
-  .btn-ghost-light:hover { background: rgba(255,255,255,0.16); transform: translateY(-2px); }
 
   /* ---------- skip link ---------- */
   .skip-link {
@@ -167,15 +163,12 @@
   .hero-meta .item { display: flex; align-items: center; gap: 10px; font-size: 0.92rem; color: var(--secondary); font-weight: 500; }
   .hero-meta .item svg { color: var(--primary); flex-shrink: 0; }
 
-  /* media treatment: photo with a soft navy duotone for brand cohesion */
-  .media { position: relative; border-radius: var(--r-xl); overflow: hidden; background: var(--secondary); box-shadow: var(--shadow-soft); }
+  /* media treatment: soft navy gradient for brand cohesion, kept light so food stays appetizing */
+  .media { position: relative; border-radius: var(--r-xl); overflow: hidden; background: var(--croissant); box-shadow: var(--shadow-soft); }
   .media img { width: 100%; height: 100%; object-fit: cover; }
   .media::after {
     content: ""; position: absolute; inset: 0; pointer-events: none;
-    background:
-      radial-gradient(110% 80% at 100% 0%, rgba(255,198,0,0.16), transparent 55%),
-      linear-gradient(180deg, rgba(0,30,96,0.10), rgba(0,30,96,0.34));
-    mix-blend-mode: multiply;
+    background: linear-gradient(180deg, rgba(0,30,96,0.02), rgba(0,30,96,0.18));
   }
   .hero-art { aspect-ratio: 4 / 5; }
 
@@ -210,16 +203,15 @@
   }
 
   /* ============================================================
-     OFFERINGS - bento with rhythm (6 items, exact cells)
+     SIGNATURE PICKS - bento with rhythm (6 cells, exact)
      ============================================================ */
   .offerings { background: var(--neutral); }
   .offer-head { max-width: 620px; margin-bottom: var(--s-xl); }
-  .offer-head h2 { margin-top: var(--s-md); }
 
   .bento { display: grid; gap: var(--s-md); grid-template-columns: 1fr; }
   .tile {
     position: relative; border-radius: var(--r-lg); overflow: hidden;
-    padding: var(--s-lg); min-height: 190px;
+    padding: var(--s-lg); min-height: 200px;
     display: flex; flex-direction: column; justify-content: flex-end;
     transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
   }
@@ -232,29 +224,74 @@
   .tile-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
   .tile-photo::after {
     content: ""; position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(180deg, rgba(14,17,68,0.12) 0%, rgba(14,17,68,0.86) 92%);
+    background: linear-gradient(180deg, rgba(14,17,68,0.10) 0%, rgba(14,17,68,0.84) 92%);
   }
   .tile-photo > * { position: relative; z-index: 2; }
-  .tile-photo p { color: rgba(255,255,255,0.86); }
+  .tile-photo p { color: rgba(255,255,255,0.88); }
 
-  /* tinted tiles */
-  .tile-cream     { background: var(--surface); color: var(--secondary); border: 1px solid rgba(0,30,96,0.10); }
-  .tile-cream p   { color: var(--muted); }
-  .tile-croissant { background: var(--croissant); color: var(--secondary); }
-  .tile-croissant p { color: #6a5a3a; }
   .tile-navy      { background: var(--primary); color: var(--text-inverse); }
   .tile-navy p    { color: rgba(255,255,255,0.82); }
   .tile-navy .kicker { color: var(--tertiary); }
+  .tile-croissant { background: var(--croissant); color: var(--secondary); }
+  .tile-croissant p { color: #6a5a3a; }
   .kicker { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: auto; opacity: 0.85; }
 
   @media (min-width: 760px) {
-    .bento { grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(190px, 1fr); }
+    .bento { grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(200px, 1fr); }
     .b-feature { grid-column: span 2; grid-row: span 2; }
     .b-feature h3 { font-size: 1.6rem; }
   }
 
   /* ============================================================
-     NEIGHBOURHOOD - navy panel, storefront photo + hairline list
+     MENU - official menu, browse by category
+     pill nav + per-category horizontal scroll-snap rows
+     ============================================================ */
+  .menu { background: var(--surface); }
+  .menu-head { max-width: 640px; }
+  .menu-head h2 { margin-top: var(--s-md); }
+  .menu-actions { display: flex; flex-wrap: wrap; gap: var(--s-md); margin-top: var(--s-lg); }
+  .menu-note { font-size: 0.82rem; color: var(--muted); margin-top: var(--s-md); max-width: 64ch; }
+  .menu-note a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+
+  .menu-nav {
+    display: flex; gap: 10px; overflow-x: auto;
+    padding-block: var(--s-lg); margin-top: var(--s-sm);
+    scrollbar-width: thin; -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+  .menu-nav a {
+    flex: 0 0 auto; scroll-snap-align: start;
+    background: var(--neutral); color: var(--secondary);
+    border: 1px solid rgba(0,30,96,0.12); border-radius: var(--r-pill);
+    padding: 9px 16px; font-size: 0.85rem; font-weight: 700; font-family: 'Montserrat', sans-serif;
+    transition: transform 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+  .menu-nav a:hover, .menu-nav a:focus-visible { border-color: var(--primary); transform: translateY(-1px); }
+
+  .menu-groups { display: grid; gap: var(--s-xl); margin-top: var(--s-md); }
+  .menu-cat { scroll-margin-top: 96px; }
+  .menu-cat-head { padding-top: var(--s-lg); border-top: 1px solid rgba(0,30,96,0.12); }
+  .menu-cat-head h3 { font-size: 1.3rem; font-weight: 800; color: var(--secondary); letter-spacing: -0.01em; }
+  .menu-cat-head p { color: var(--muted); font-size: 0.92rem; max-width: 60ch; margin-top: 6px; }
+
+  .menu-row {
+    display: flex; gap: var(--s-md);
+    overflow-x: auto; padding: var(--s-md) 0 var(--s-lg);
+    scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+  }
+  .menu-item { flex: 0 0 auto; width: 190px; scroll-snap-align: start; }
+  .menu-item a { display: flex; flex-direction: column; gap: 10px; transition: transform 0.25s var(--ease); }
+  .menu-item a:hover { transform: translateY(-4px); }
+  .menu-thumb {
+    aspect-ratio: 4 / 3; border-radius: var(--r-lg); overflow: hidden;
+    background: var(--croissant); box-shadow: var(--shadow-card);
+  }
+  .menu-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s var(--ease); }
+  .menu-item a:hover .menu-thumb img { transform: scale(1.05); }
+  .menu-name { font-size: 0.9rem; font-weight: 600; color: var(--secondary); line-height: 1.35; }
+
+  /* ============================================================
+     NEIGHBOURHOOD - navy panel + café photo + hairline list
      ============================================================ */
   .hood { background: var(--surface); }
   .hood-panel {
@@ -269,7 +306,7 @@
   }
   .hood-art { min-height: 280px; position: relative; }
   .hood-art .media { border-radius: 0; height: 100%; box-shadow: none; }
-  .hood-art .media::after { background: linear-gradient(180deg, rgba(0,30,96,0.18), rgba(0,30,96,0.45)); }
+  .hood-art .media::after { background: linear-gradient(180deg, rgba(0,30,96,0.10), rgba(0,30,96,0.40)); }
   .hood-body { padding: clamp(28px, 4.5vw, 52px); }
   .hood-body h2 { color: var(--text-inverse); max-width: 16ch; }
   .hood-body > p { color: rgba(255,255,255,0.84); margin-top: var(--s-md); max-width: 48ch; }
@@ -340,8 +377,8 @@
 
   /* ============================================================
      MOTION (dial 4): CSS-only, reduced-motion safe.
-     Base state stays VISIBLE; reveal only applies where supported
-     AND motion is allowed, so nothing hides without animating.
+     Base state stays visible; reveal applies only where supported
+     AND motion allowed, so nothing hides without animating.
      ============================================================ */
   @media (prefers-reduced-motion: no-preference) {
     .hero-copy > * { opacity: 0; animation: fade-up 0.7s var(--ease) forwards; }
@@ -385,7 +422,7 @@
       <span class="brand-loc">Yonge &amp; Eglinton</span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#offerings">Offerings</a>
+      <a href="#menu">Menu</a>
       <a href="#cafe">Our café</a>
       <a href="#visit">Hours &amp; location</a>
     </nav>
@@ -400,15 +437,15 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <span class="label">Bakery café at Yonge &amp; Eglinton</span>
+        <span class="label">Yonge &amp; Eglinton bakery café</span>
         <h1 id="hero-title">Freshly baked,<br /><span class="accent">close to home.</span></h1>
         <p class="intro">
           A neighbourhood bakery café at Yonge and Eglinton. Handcrafted cakes,
-          fresh pastries and breads, coffee and tea.
+          fresh pastries and breads, savoury bakes, and Lavazza coffee.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#visit">Visit us today</a>
-          <a class="btn btn-outline" href="https://parisbaguette.ca/locations/on/toronto/2401-yonge-street/" target="_blank" rel="noopener">View the menu</a>
+          <a class="btn btn-primary" href="#menu">View menu</a>
+          <a class="btn btn-outline" href="#visit">Visit us today</a>
         </div>
         <div class="hero-meta">
           <span class="item">
@@ -423,8 +460,8 @@
       </div>
 
       <div class="media hero-art">
-        <img src="https://picsum.photos/seed/pb-eglinton-bakery-counter/1100/1320" width="1100" height="1320"
-             alt="Warm bakery café counter with fresh pastries and breads on display" fetchpriority="high" />
+        <img src="https://parisbaguette.ca/wp-content/uploads/2026/05/fd7fa16e6ffa49f6981d0bed5de1ddfc-1.jpg"
+             alt="Strawberry soft cream layer cake topped with fresh strawberries" fetchpriority="high" />
       </div>
     </div>
   </section>
@@ -434,11 +471,13 @@
     <div class="container">
       <ul class="chips">
         <li class="chip">Handcrafted cakes</li>
-        <li class="chip">Pastries &amp; breads</li>
+        <li class="chip">Pastries &amp; croissants</li>
+        <li class="chip">Fresh-baked breads</li>
+        <li class="chip">Savoury bakes</li>
+        <li class="chip">Sandwiches &amp; wraps</li>
         <li class="chip">Lavazza coffee</li>
-        <li class="chip">Teas</li>
-        <li class="chip">Grab-and-go salads &amp; sandwiches</li>
-        <li class="chip">Catering</li>
+        <li class="chip">Iced &amp; frozen drinks</li>
+        <li class="chip">Grab-and-go treats</li>
       </ul>
     </div>
   </section>
@@ -447,8 +486,8 @@
   <section class="section hood" id="cafe" aria-labelledby="cafe-title">
     <div class="container story-grid reveal">
       <div class="media story-art">
-        <img src="https://picsum.photos/seed/pb-eglinton-morning-bake/1100/880" width="1100" height="880" loading="lazy"
-             alt="Baker preparing fresh bread early in the morning" />
+        <img src="https://parisbaguette.ca/wp-content/uploads/2026/03/3a56c0f072204cd2adaee7531e36faad-2.jpg" loading="lazy"
+             alt="Golden almond croissant dusted with icing sugar" />
       </div>
       <div class="story-copy">
         <h2 id="cafe-title">Baked through the day, from morning to night</h2>
@@ -464,59 +503,332 @@
     </div>
   </section>
 
-  <!-- ============ Offerings bento ============ -->
-  <section class="section offerings" id="offerings" aria-labelledby="offer-title">
+  <!-- ============ Signature picks bento ============ -->
+  <section class="section offerings" aria-labelledby="picks-title">
     <div class="container">
       <div class="offer-head">
-        <span class="label">On the counter</span>
-        <h2 id="offer-title">Made for everyday moments</h2>
-        <p class="lead">From a morning coffee run to a celebration cake, here is what you will find at our Yonge and Eglinton café.</p>
+        <h2 id="picks-title">Signature picks from the counter</h2>
+        <p class="lead">A taste of what you will find at our Yonge and Eglinton café, from celebration cakes to coffee.</p>
       </div>
 
       <div class="bento reveal">
         <!-- Feature: cakes (photo, 2x2) -->
         <article class="tile tile-photo b-feature">
-          <img src="https://picsum.photos/seed/pb-eglinton-cake/900/900" width="900" height="900" loading="lazy"
-               alt="Handcrafted layer cake decorated by hand" />
-          <span class="kicker">Centrepiece</span>
+          <img src="https://parisbaguette.ca/wp-content/uploads/2026/05/fa1315d300ae4454b19ded3fa0da3b45-1.jpg" loading="lazy"
+               alt="Celebration party cake decorated with fresh fruit and cream" />
           <h3>Handcrafted cakes</h3>
           <p>Layered, decorated, and made to mark the moments that matter.</p>
         </article>
 
         <!-- Pastries (photo) -->
         <article class="tile tile-photo">
-          <img src="https://picsum.photos/seed/pb-eglinton-pastry/800/600" width="800" height="600" loading="lazy"
-               alt="Golden croissants and freshly baked pastries" />
-          <h3>Freshly baked pastries</h3>
-          <p>Buttery, flaky favourites for a café stop or a treat to take home.</p>
+          <img src="https://parisbaguette.ca/wp-content/uploads/2026/03/37729b22fc39492aa9f190cb20ac7da3-2.jpg" loading="lazy"
+               alt="Freshly baked butter croissant" />
+          <h3>Pastries &amp; croissants</h3>
+          <p>Buttery, flaky favourites baked through the day.</p>
         </article>
 
-        <!-- Breads (tinted white) -->
-        <article class="tile tile-cream">
+        <!-- Breads (photo) -->
+        <article class="tile tile-photo">
+          <img src="https://parisbaguette.ca/wp-content/uploads/2026/03/d40facd274794e8f8eb46e5150c14e26-2.jpg" loading="lazy"
+               alt="Round sourdough loaf bread" />
           <h3>Fresh-baked breads</h3>
-          <p>A daily selection of loaves, ready to take home for the table.</p>
+          <p>Baguettes and loaves, ready to take home.</p>
         </article>
 
-        <!-- Coffee & tea (navy) -->
+        <!-- Coffee & tea (navy, no image) -->
         <article class="tile tile-navy">
           <span class="kicker">Stay a while</span>
           <h3>Lavazza coffee &amp; teas</h3>
-          <p>Espresso, brewed coffee, and a selection of teas to stay or to go.</p>
+          <p>Espresso, lattes, and teas crafted by our baristas, to stay or to go.</p>
         </article>
 
-        <!-- Grab and go (croissant tint) -->
+        <!-- Grab and go (croissant tint, no image) -->
         <article class="tile tile-croissant">
           <h3>Grab-and-go café items</h3>
-          <p>Salads and sandwiches made for busy days and quick lunches.</p>
+          <p>Salads, sandwiches, and sweet treats for busy days.</p>
         </article>
 
-        <!-- Catering (photo) -->
+        <!-- Sweet treats (photo) -->
         <article class="tile tile-photo">
-          <img src="https://picsum.photos/seed/pb-eglinton-catering/800/600" width="800" height="600" loading="lazy"
-               alt="Platter of assorted baked goods for catering" />
-          <h3>Catering</h3>
-          <p>Platters for gatherings, available through official ordering links.</p>
+          <img src="https://parisbaguette.ca/wp-content/uploads/2026/03/6e72eb8dc2fc45b48d14099189b0e4a8-2.jpg" loading="lazy"
+               alt="Glazed croissant donut" />
+          <h3>Donuts &amp; treats</h3>
+          <p>Croissant donuts, cookies, and packaged sweets.</p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Menu by category ============ -->
+  <section class="section menu" id="menu" aria-labelledby="menu-title">
+    <div class="container">
+      <div class="menu-head">
+        <span class="label">From the official menu</span>
+        <h2 id="menu-title">Explore the menu</h2>
+        <p class="lead">A curated look across the Paris Baguette menu. Browse a few favourites by category, then see the full menu to order.</p>
+        <div class="menu-actions">
+          <a class="btn btn-primary" href="https://parisbaguette.ca/menu/" target="_blank" rel="noopener">View full menu</a>
+          <a class="btn btn-outline" href="https://parisbaguette.ca/locations/on/toronto/2401-yonge-street/" target="_blank" rel="noopener">Order ahead</a>
+        </div>
+        <p class="menu-note">
+          Menu items and availability vary by location and season. Please verify and order through the
+          official <a href="https://parisbaguette.ca/menu/" target="_blank" rel="noopener">Paris Baguette menu</a>
+          and our <a href="https://parisbaguette.ca/locations/on/toronto/2401-yonge-street/" target="_blank" rel="noopener">location page</a>.
+        </p>
+      </div>
+
+      <nav class="menu-nav" aria-label="Menu categories">
+        <a href="#cat-cakes">Cakes</a>
+        <a href="#cat-seasonal">Seasonal Sweets</a>
+        <a href="#cat-pastries">Sweets &amp; Pastries</a>
+        <a href="#cat-savouries">Savouries</a>
+        <a href="#cat-breads">Shareable Breads</a>
+        <a href="#cat-breakfast">Breakfast Sandwiches</a>
+        <a href="#cat-lunch">Salads &amp; Sandwiches</a>
+        <a href="#cat-hot">Hot Beverages</a>
+        <a href="#cat-iced">Iced Beverages</a>
+        <a href="#cat-frozen">Frozen Beverages</a>
+        <a href="#cat-packaged">Roll Cakes &amp; Treats</a>
+        <a href="#cat-grabgo">Grab &amp; Go</a>
+      </nav>
+
+      <div class="menu-groups">
+
+        <!-- Cakes -->
+        <section class="menu-cat reveal" id="cat-cakes" aria-labelledby="cat-cakes-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-cakes-h">Cakes</h3>
+            <p>Classic and unique flavours, decorated by hand for every occasion. Allow lead time for whole cakes.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/cakes-24-hour-lead-time-strawberry-soft-cream-cake/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Strawberry Soft Cream Cake" src="https://parisbaguette.ca/wp-content/uploads/2026/05/fd7fa16e6ffa49f6981d0bed5de1ddfc-1.jpg" /></div>
+              <span class="menu-name">Strawberry Soft Cream Cake</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/cakes-24-hour-lead-time-red-velvet-cake/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Red Velvet Cake" src="https://parisbaguette.ca/wp-content/uploads/2026/05/285c3228ea2b479688506fa857fd44df-1.jpg" /></div>
+              <span class="menu-name">Red Velvet Cake</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/cakes-24-hour-lead-time-blueberry-chiffon-cake/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Blueberry Chiffon Cake" src="https://parisbaguette.ca/wp-content/uploads/2026/05/1c33a506366d4a70b4975a8750f00066-1.jpg" /></div>
+              <span class="menu-name">Blueberry Chiffon Cake</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/cakes-24-hour-lead-time-chocolate-cake/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Chocolate Cake" src="https://parisbaguette.ca/wp-content/uploads/2026/05/a17492bbcc29430eb404f7ffab312c51-1.jpg" /></div>
+              <span class="menu-name">Chocolate Cake</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Seasonal Sweets -->
+        <section class="menu-cat reveal" id="cat-seasonal" aria-labelledby="cat-seasonal-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-seasonal-h">Seasonal Sweets</h3>
+            <p>Limited-time pastries and treats, including Nutella® favourites.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/croissant-filled-with-nutella/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Croissant filled with Nutella®" src="https://parisbaguette.ca/wp-content/uploads/2026/03/b40cf5cdda0a466b995f446bc0038366.jpg" /></div>
+              <span class="menu-name">Croissant filled with Nutella®</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/belgian-waffle-with-strawberry-nutella/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Belgian Waffle with Strawberry & Nutella®" src="https://parisbaguette.ca/wp-content/uploads/2026/03/eff105a0e1044833b4dcb9c357c0a422.jpg" /></div>
+              <span class="menu-name">Belgian Waffle with Strawberry &amp; Nutella®</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/milk-cereal-king-cream-donut/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Milk & Cereal King Cream Donut" src="https://parisbaguette.ca/wp-content/uploads/2026/03/c5892d1f9b024a1ab7d2d4695033dbeb.jpg" /></div>
+              <span class="menu-name">Milk &amp; Cereal King Cream Donut</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Sweets & Pastries -->
+        <section class="menu-cat reveal" id="cat-pastries" aria-labelledby="cat-pastries-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-pastries-h">Sweets &amp; Pastries</h3>
+            <p>Croissants and flaky favourites, freshly baked through the day.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/croissant/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Croissant" src="https://parisbaguette.ca/wp-content/uploads/2026/03/37729b22fc39492aa9f190cb20ac7da3-2.jpg" /></div>
+              <span class="menu-name">Croissant</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/pain-au-chocolat/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Pain au Chocolat" src="https://parisbaguette.ca/wp-content/uploads/2026/03/e7075c31bc884d25ba55ca4dc9ee3580-2.jpg" /></div>
+              <span class="menu-name">Pain au Chocolat</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/almond-croissant/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Almond Croissant" src="https://parisbaguette.ca/wp-content/uploads/2026/03/3a56c0f072204cd2adaee7531e36faad-2.jpg" /></div>
+              <span class="menu-name">Almond Croissant</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/pastel-de-nata/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Pastel De Nata" src="https://parisbaguette.ca/wp-content/uploads/2026/03/c83c29ad2726420d93a51146854e7751-2.jpg" /></div>
+              <span class="menu-name">Pastel De Nata</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Savouries -->
+        <section class="menu-cat reveal" id="cat-savouries" aria-labelledby="cat-savouries-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-savouries-h">Savouries</h3>
+            <p>Quiches, pizzettas, and stuffed bakes for a quick bite.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/pepperoni-pizzetta/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Pepperoni Pizzetta" src="https://parisbaguette.ca/wp-content/uploads/2026/03/f2f52e7795ae44fbb2d4705af89989a3-2.jpg" /></div>
+              <span class="menu-name">Pepperoni Pizzetta</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/4-cheese-quiche/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="4 Cheese Quiche" src="https://parisbaguette.ca/wp-content/uploads/2026/03/57e03e56ea09420596dc5b029f6461f8-2.jpg" /></div>
+              <span class="menu-name">4 Cheese Quiche</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/ham-cheese-pastry/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Ham & Cheese Pastry" src="https://parisbaguette.ca/wp-content/uploads/2026/03/2db1c8911da04e9180f077aff9f0dc30-2.jpg" /></div>
+              <span class="menu-name">Ham &amp; Cheese Pastry</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Shareable Breads -->
+        <section class="menu-cat reveal" id="cat-breads" aria-labelledby="cat-breads-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-breads-h">Shareable Breads</h3>
+            <p>From classic baguettes to soft loaves, baked fresh to take home.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/baguette/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Baguette" src="https://parisbaguette.ca/wp-content/uploads/2026/03/99b1e67396e24bf692ba34d5fe4edccd-2.jpg" /></div>
+              <span class="menu-name">Baguette</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/sourdough-loaf-bread/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Sourdough Loaf Bread" src="https://parisbaguette.ca/wp-content/uploads/2026/03/d40facd274794e8f8eb46e5150c14e26-2.jpg" /></div>
+              <span class="menu-name">Sourdough Loaf Bread</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/milk-bread/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Milk Bread" src="https://parisbaguette.ca/wp-content/uploads/2026/03/2f4a93fe97f54c41baf0e7e412b8efd0-2.jpg" /></div>
+              <span class="menu-name">Milk Bread</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Breakfast Sandwiches -->
+        <section class="menu-cat reveal" id="cat-breakfast" aria-labelledby="cat-breakfast-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-breakfast-h">Breakfast Sandwiches</h3>
+            <p>Egg, cheese, and bacon on fresh croissants and rolls. Pair with a coffee.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/bacon-egg-cheddar-croissant/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Bacon, Egg & Cheddar Croissant" src="https://parisbaguette.ca/wp-content/uploads/2026/03/62dacaa5fb0e4832acb5fe8cf9650966-2.jpg" /></div>
+              <span class="menu-name">Bacon, Egg &amp; Cheddar Croissant</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/ham-egg-swiss-twist-roll/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Ham, Egg & Swiss Twist Roll" src="https://parisbaguette.ca/wp-content/uploads/2026/03/e4a320becc834cda8e3e6ba31660e140-2.jpg" /></div>
+              <span class="menu-name">Ham, Egg &amp; Swiss Twist Roll</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/egg-cheddar-twist-roll/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Egg & Cheddar Twist Roll" src="https://parisbaguette.ca/wp-content/uploads/2026/03/ebdcfee478064205a2a169502c7410f9-2.jpg" /></div>
+              <span class="menu-name">Egg &amp; Cheddar Twist Roll</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Salads, Sandwiches & Wraps -->
+        <section class="menu-cat reveal" id="cat-lunch" aria-labelledby="cat-lunch-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-lunch-h">Salads, Sandwiches &amp; Wraps</h3>
+            <p>Fresh lunch options for here or to go.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/sourdough-turkey-melt/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Sourdough Turkey Melt" src="https://parisbaguette.ca/wp-content/uploads/2026/03/ba629b9a60e14ed9816850904aeb219c-2.jpg" /></div>
+              <span class="menu-name">Sourdough Turkey Melt</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/chicken-caesar-wrap/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Chicken Caesar Wrap" src="https://parisbaguette.ca/wp-content/uploads/2026/03/87fa31f8820f40e08758ae4e9890762b-2.jpg" /></div>
+              <span class="menu-name">Chicken Caesar Wrap</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/caprese-baguette/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Caprese Baguette" src="https://parisbaguette.ca/wp-content/uploads/2026/03/19ce0444514f487db85deca0e3b8ef93-2.jpg" /></div>
+              <span class="menu-name">Caprese Baguette</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Hot Beverages -->
+        <section class="menu-cat reveal" id="cat-hot" aria-labelledby="cat-hot-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-hot-h">Hot Beverages</h3>
+            <p>Lavazza coffee, lattes, and teas crafted by our baristas.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/cafe-latte/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Cafe Latte" src="https://parisbaguette.ca/wp-content/uploads/2026/03/c360e99fbcb64ac5bf887c45c9d901db-10.jpg" /></div>
+              <span class="menu-name">Cafe Latte</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/cappuccino/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Cappuccino" src="https://parisbaguette.ca/wp-content/uploads/2026/03/2f2834ed1a01405da90376c7e8db1d68-2.jpg" /></div>
+              <span class="menu-name">Cappuccino</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/caramel-macchiato/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Caramel Macchiato" src="https://parisbaguette.ca/wp-content/uploads/2026/03/73528adad0f64f98b39cb4335bc18b3e-2.jpg" /></div>
+              <span class="menu-name">Caramel Macchiato</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Iced Beverages -->
+        <section class="menu-cat reveal" id="cat-iced" aria-labelledby="cat-iced-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-iced-h">Iced Beverages</h3>
+            <p>Iced coffees, cold brews, and teas to cool down.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/iced-caramel-macchiato/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Iced Caramel Macchiato" src="https://parisbaguette.ca/wp-content/uploads/2026/03/b71fc74ced4b4d448cfe20ee3f0ffa78-2.jpg" /></div>
+              <span class="menu-name">Iced Caramel Macchiato</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/cold-brew/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Cold Brew" src="https://parisbaguette.ca/wp-content/uploads/2026/03/f5e8c9ffdd334a0c8106bcdd6edc10ca-7.jpg" /></div>
+              <span class="menu-name">Cold Brew</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/iced-matcha-latte/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Iced Matcha Latte" src="https://parisbaguette.ca/wp-content/uploads/2026/03/455395d5ff474e958300c6f018f42bae-2.jpg" /></div>
+              <span class="menu-name">Iced Matcha Latte</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Frozen Beverages -->
+        <section class="menu-cat reveal" id="cat-frozen" aria-labelledby="cat-frozen-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-frozen-h">Frozen Beverages</h3>
+            <p>Frappes and smoothies blended to order.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/coffee-frappe/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Coffee Frappe" src="https://parisbaguette.ca/wp-content/uploads/2026/03/49f3e4d92d2d46fc8ea2db63b2d548df-2.jpg" /></div>
+              <span class="menu-name">Coffee Frappe</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/matcha-frappe/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Matcha Frappe" src="https://parisbaguette.ca/wp-content/uploads/2026/03/f83ff9175b4948ab9820f6e192dfa422-4.jpg" /></div>
+              <span class="menu-name">Matcha Frappe</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/strawberry-smoothie/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Strawberry Smoothie" src="https://parisbaguette.ca/wp-content/uploads/2026/03/f0feb5dd83df4c28901edc22e45a5587-2.jpg" /></div>
+              <span class="menu-name">Strawberry Smoothie</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Roll Cakes & Packaged Treats -->
+        <section class="menu-cat reveal" id="cat-packaged" aria-labelledby="cat-packaged-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-packaged-h">Roll Cakes &amp; Packaged Treats</h3>
+            <p>Roll cakes and castella, packaged for sharing.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/signature-roll-cake/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Signature Roll Cake" src="https://parisbaguette.ca/wp-content/uploads/2026/03/2d99206ce93d496c822e5a2ab1cf673b-2.jpg" /></div>
+              <span class="menu-name">Signature Roll Cake</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/green-tea-roll-cake/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Green Tea Roll Cake" src="https://parisbaguette.ca/wp-content/uploads/2026/03/526a25e6995e4d8bb6a9f06902e2a4b6-2.jpg" /></div>
+              <span class="menu-name">Green Tea Roll Cake</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/castella/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Castella" src="https://parisbaguette.ca/wp-content/uploads/2026/03/7aab8bc02f8e4911b7e102815dc3d32c-2.jpg" /></div>
+              <span class="menu-name">Castella</span></a></li>
+          </ul>
+        </section>
+
+        <!-- Grab & Go -->
+        <section class="menu-cat reveal" id="cat-grabgo" aria-labelledby="cat-grabgo-h">
+          <div class="menu-cat-head">
+            <h3 id="cat-grabgo-h">Grab &amp; Go</h3>
+            <p>Cookies, brownies, and muffins for a quick treat on the move.</p>
+          </div>
+          <ul class="menu-row">
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/triple-chocolate-chip-cookie/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Triple Chocolate Chip Cookie" src="https://parisbaguette.ca/wp-content/uploads/2026/03/4bca5146ddab42f0ae72b637d3bd8a5e-2.jpg" /></div>
+              <span class="menu-name">Triple Chocolate Chip Cookie</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/decadent-chocolate-brownie/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Decadent Chocolate Brownie" src="https://parisbaguette.ca/wp-content/uploads/2026/03/4268a02a62044895b783a82eb19597b5-2.jpg" /></div>
+              <span class="menu-name">Decadent Chocolate Brownie</span></a></li>
+            <li class="menu-item"><a href="https://parisbaguette.ca/product/vegan-blueberry-muffin/" target="_blank" rel="noopener">
+              <div class="menu-thumb"><img loading="lazy" alt="Vegan Blueberry Muffin" src="https://parisbaguette.ca/wp-content/uploads/2026/03/a89b5e9357724792964deeb656d81344-2.jpg" /></div>
+              <span class="menu-name">Vegan Blueberry Muffin</span></a></li>
+          </ul>
+        </section>
+
       </div>
     </div>
   </section>
@@ -527,8 +839,8 @@
       <div class="hood-panel reveal">
         <div class="hood-art">
           <div class="media">
-            <img src="https://picsum.photos/seed/pb-eglinton-storefront-yonge/1000/900" width="1000" height="900" loading="lazy"
-                 alt="Bakery café storefront on Yonge Street" />
+            <img src="https://parisbaguette.ca/wp-content/uploads/2026/03/c360e99fbcb64ac5bf887c45c9d901db-10.jpg" loading="lazy"
+                 alt="Cafe latte with latte art in a cup" />
           </div>
         </div>
         <div class="hood-body">
@@ -558,8 +870,7 @@
     <div class="container">
       <div class="visit-card reveal">
         <div class="visit-lead">
-          <span class="label">Hours &amp; location</span>
-          <h2 id="visit-title" style="margin-top:var(--s-md)">Come see us today</h2>
+          <h2 id="visit-title">Come see us today</h2>
           <p>Drop by Paris Baguette Yonge and Eglinton for something freshly baked, or call ahead and we will help you plan.</p>
           <div class="actions">
             <a class="btn btn-primary" href="tel:+14163223337">Call the café</a>
@@ -626,8 +937,9 @@
     <div class="footer-col">
       <h3>More</h3>
       <ul>
+        <li><a href="https://parisbaguette.ca/menu/" target="_blank" rel="noopener">Full menu</a></li>
         <li><a href="https://parisbaguette.ca/locations/on/toronto/2401-yonge-street/" target="_blank" rel="noopener">Official location page</a></li>
-        <li><a href="#offerings">Offerings</a></li>
+        <li><a href="#menu">Menu by category</a></li>
         <li><a href="#visit">Hours &amp; location</a></li>
       </ul>
     </div>
